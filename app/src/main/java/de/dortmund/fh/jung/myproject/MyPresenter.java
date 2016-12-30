@@ -25,6 +25,6 @@ public final class MyPresenter implements Contract.Presenter{
 
     @Override
     public void handleClickEvent() {
-        mView.setText("Hi. Presenter told me too.");
+        mView.setText("Hi. Presenter told me to.");
     }
 }
