@@ -1,16 +1,22 @@
 
-package de.dortmund.fh.jung.myproject;
+package de.dortmund.fh.jung.myproject.mainview;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+
+import de.dortmund.fh.jung.myproject.BaseActivity;
+import de.dortmund.fh.jung.myproject.di.DaggerMyComponent;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements Contract.View {
+import de.dortmund.fh.jung.myproject.R;
+
+public class MainActivity extends BaseActivity implements Contract.View {
 
     @Inject
     Contract.Presenter mPresenter;
@@ -22,13 +28,25 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //inject Context of ParentApplication per BaseActivity
+        //Eigentlich per Interface umsetzen!!
+        getAppComponent().inject(this);
+
         // Create the presenter
         DaggerMyComponent.builder()
                 .presenterModule(new PresenterModule())
                 .build()
                 .inject(this);
 
+        //Bind this view to presenter
         mPresenter.bind(this);
+
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.handleClickEvent();
+            }
+        });
     }
 
     @Override

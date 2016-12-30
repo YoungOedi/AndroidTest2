@@ -1,8 +1,11 @@
-package de.dortmund.fh.jung.myproject;
+package de.dortmund.fh.jung.myproject.di;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
+import de.dortmund.fh.jung.myproject.ApplicationModule;
+import de.dortmund.fh.jung.myproject.mainview.MainActivity;
+import de.dortmund.fh.jung.myproject.mainview.PresenterModule;
 
 /**
  * Created by hendrikjung on 29.12.16.

@@ -1,5 +1,5 @@
 
-package de.dortmund.fh.jung.myproject;
+package de.dortmund.fh.jung.myproject.mainview;
 
 import dagger.Module;
 import dagger.Provides;
