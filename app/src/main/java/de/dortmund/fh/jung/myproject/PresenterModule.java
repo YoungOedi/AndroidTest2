@@ -1,7 +1,6 @@
 
 package de.dortmund.fh.jung.myproject;
 
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -11,15 +10,14 @@ import dagger.Provides;
 
 @Module
 public class PresenterModule {
-    private final Contract.View mView;
 
-    public PresenterModule(Contract.View view) {
-        mView = view;
+    public PresenterModule() {
+
     }
 
     @Provides
-    Contract.View provideTasksContractView() {
-        return mView;
+    Contract.Presenter providePresenter(MyPresenter presenter) {
+        return presenter;
     }
 
 }

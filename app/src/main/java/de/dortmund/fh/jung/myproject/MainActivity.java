@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity implements Contract.View {
 
     @Inject
-    MyPresenter mMyPresenter;
+    Contract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,17 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
 
         // Create the presenter
         DaggerMyComponent.builder()
-                .presenterModule(new PresenterModule(this)).build()
+                .presenterModule(new PresenterModule())
+                .build()
                 .inject(this);
+
+        mPresenter.bind(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.unbind();
     }
 
     @Override
@@ -41,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        mMyPresenter.handleClickEvent();
+        mPresenter.handleClickEvent();
         // noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -55,8 +64,4 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
         Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void setPresenter(MyPresenter myPresenter) {
-        mMyPresenter = myPresenter;
-    }
 }

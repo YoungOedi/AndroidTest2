@@ -11,20 +11,24 @@ import javax.inject.Inject;
 
 public final class MyPresenter implements Contract.Presenter{
 
-    private final Contract.View mView;
+    private Contract.View mView;
 
     @Inject
-    MyPresenter(Contract.View view) {
-       mView = view;
-    }
-
-    @Inject
-    void setupListeners() {
-        mView.setPresenter(this);
+    MyPresenter() {
     }
 
     @Override
     public void handleClickEvent() {
         mView.setText("Hi. Presenter told me to.");
+    }
+
+    @Override
+    public void bind(Contract.View view) {
+        mView = view;
+    }
+
+    @Override
+    public void unbind() {
+        mView=null;
     }
 }

@@ -8,7 +8,7 @@ import dagger.Component;
  * Created by hendrikjung on 29.12.16.
  */
 @Singleton
-@Component(modules = PresenterModule.class)
+@Component(modules = {PresenterModule.class, ApplicationModule.class})
 public interface MyComponent {
 
     void inject(MainActivity activity);

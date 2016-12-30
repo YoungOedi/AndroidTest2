@@ -7,11 +7,12 @@ package de.dortmund.fh.jung.myproject;
 public interface Contract {
     interface View{
         void setText(String text);
-        void setPresenter(MyPresenter presenter);
     }
 
     interface Presenter{
         void handleClickEvent();
+        void bind(Contract.View view);
+        void unbind();
     }
 
 }
