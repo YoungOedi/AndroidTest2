@@ -28,8 +28,6 @@ public class MainActivity extends BaseActivity implements Contract.View {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //inject Context of ParentApplication per BaseActivity
-        //Eigentlich per Interface umsetzen!!
         getAppComponent().inject(this);
 
         // Create the presenter
@@ -41,12 +39,7 @@ public class MainActivity extends BaseActivity implements Contract.View {
         //Bind this view to presenter
         mPresenter.bind(this);
 
-        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.handleClickEvent();
-            }
-        });
+        findViewById(R.id.fab).setOnClickListener(view->mPresenter.handleClickEvent(-1));
     }
 
     @Override
@@ -64,11 +57,8 @@ public class MainActivity extends BaseActivity implements Contract.View {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        mPresenter.handleClickEvent();
+        mPresenter.handleClickEvent(id);
         // noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;

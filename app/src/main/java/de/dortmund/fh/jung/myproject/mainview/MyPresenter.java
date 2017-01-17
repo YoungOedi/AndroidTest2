@@ -1,13 +1,7 @@
 
 package de.dortmund.fh.jung.myproject.mainview;
 
-import android.view.View;
-
 import javax.inject.Inject;
-
-/**
- * Created by hendrikjung on 29.12.16.
- */
 
 public final class MyPresenter implements Contract.Presenter{
 
@@ -18,7 +12,7 @@ public final class MyPresenter implements Contract.Presenter{
     }
 
     @Override
-    public void handleClickEvent() {
+    public void handleClickEvent(final int id) {
         mView.setText("Hi. Presenter told me to.");
     }
 
