@@ -1,7 +1,11 @@
 
 package de.dortmund.fh.jung.myproject.mainview;
 
+import android.content.Intent;
+
 import javax.inject.Inject;
+
+import de.dortmund.fh.jung.myproject.searchview.SearchActivity;
 
 public final class MyPresenter implements Contract.Presenter {
 

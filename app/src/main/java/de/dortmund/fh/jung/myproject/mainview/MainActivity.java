@@ -1,25 +1,27 @@
 
 package de.dortmund.fh.jung.myproject.mainview;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import de.dortmund.fh.jung.myproject.BaseActivity;
-import de.dortmund.fh.jung.myproject.di.DaggerMyComponent;
 
 import javax.inject.Inject;
 
 import de.dortmund.fh.jung.myproject.R;
+import de.dortmund.fh.jung.myproject.searchview.SearchActivity;
 
 public class MainActivity extends BaseActivity implements Contract.View {
 
     @Inject
     Contract.Presenter mPresenter;
+    @Inject
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +32,19 @@ public class MainActivity extends BaseActivity implements Contract.View {
 
         getAppComponent().inject(this);
 
-        // Create the presenter
-        DaggerMyComponent.builder()
-                .presenterModule(new PresenterModule())
-                .build()
-                .inject(this);
+//        // Create the presenter
+//        DaggerMyComponent.builder()
+//                .presenterModule(new PresenterModule())
+//                .build()
+//                .inject(this);
 
         // Bind this view to presenter
         mPresenter.bind(this);
 
-        findViewById(R.id.fab).setOnClickListener(view -> mPresenter.handleClickEvent(-1));
+        findViewById(R.id.fab).setOnClickListener(view -> {
+            Intent intent = new Intent(this.getApplicationContext(), SearchActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
