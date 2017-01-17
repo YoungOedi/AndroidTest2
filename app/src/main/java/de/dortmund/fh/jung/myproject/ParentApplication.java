@@ -12,7 +12,7 @@ import de.dortmund.fh.jung.myproject.di.DaggerMyComponent;
  * Created by hendrikjung on 30.12.16.
  */
 
-public class ParentApplication extends Application implements ComponentProvider{
+public class ParentApplication extends Application implements ComponentProvider {
 
     private MyComponent mComponent;
 
@@ -28,7 +28,7 @@ public class ParentApplication extends Application implements ComponentProvider{
                 .build();
     }
 
-    public void test(){
+    public void test() {
         mComponent.hashCode();
     }
 

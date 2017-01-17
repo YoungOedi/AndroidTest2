@@ -1,14 +1,15 @@
+
 package de.dortmund.fh.jung.myproject.mainview;
 
 import de.dortmund.fh.jung.myproject.mvp.BasePresenter;
 import de.dortmund.fh.jung.myproject.mvp.BaseView;
 
 public interface Contract {
-    interface View extends BaseView{
+    interface View extends BaseView {
         void setText(String text);
     }
 
-    interface Presenter extends BasePresenter<View>{
+    interface Presenter extends BasePresenter<View> {
         void handleClickEvent(final int id);
     }
 

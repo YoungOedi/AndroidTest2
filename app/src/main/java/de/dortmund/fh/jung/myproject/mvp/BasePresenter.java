@@ -1,3 +1,4 @@
+
 package de.dortmund.fh.jung.myproject.mvp;
 
 /**
@@ -6,5 +7,6 @@ package de.dortmund.fh.jung.myproject.mvp;
 
 public interface BasePresenter<T extends BaseView> {
     void bind(final T view);
+
     void unbind();
 }

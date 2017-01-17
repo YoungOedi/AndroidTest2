@@ -3,7 +3,7 @@ package de.dortmund.fh.jung.myproject.mainview;
 
 import javax.inject.Inject;
 
-public final class MyPresenter implements Contract.Presenter{
+public final class MyPresenter implements Contract.Presenter {
 
     private Contract.View mView;
 
@@ -23,6 +23,6 @@ public final class MyPresenter implements Contract.Presenter{
 
     @Override
     public void unbind() {
-        mView=null;
+        mView = null;
     }
 }

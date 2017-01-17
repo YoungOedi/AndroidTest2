@@ -36,10 +36,10 @@ public class MainActivity extends BaseActivity implements Contract.View {
                 .build()
                 .inject(this);
 
-        //Bind this view to presenter
+        // Bind this view to presenter
         mPresenter.bind(this);
 
-        findViewById(R.id.fab).setOnClickListener(view->mPresenter.handleClickEvent(-1));
+        findViewById(R.id.fab).setOnClickListener(view -> mPresenter.handleClickEvent(-1));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity implements Contract.View {
 
     @Override
     public void setText(String text) {
-        Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
 }
