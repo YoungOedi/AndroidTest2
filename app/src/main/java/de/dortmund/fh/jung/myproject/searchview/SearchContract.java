@@ -20,6 +20,8 @@ public interface SearchContract {
         void calculateResult();
 
         void initList(List<String> list);
+
+        List<String> search(String query);
     }
 
 }

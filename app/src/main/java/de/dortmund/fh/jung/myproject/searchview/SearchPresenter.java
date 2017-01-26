@@ -23,6 +23,11 @@ public class SearchPresenter implements SearchContract.Presenter {
     }
 
     @Override
+    public List<String> search(String query) {
+        return mCheeseSearchEngine.search(query);
+    }
+
+    @Override
     public void calculateResult() {
 
     }
