@@ -38,7 +38,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
     public void showResult(List<String> result) {
         if (result.isEmpty()) {
             Toast.makeText(this, R.string.nothing_found, Toast.LENGTH_SHORT).show();
-            mAdapter.setCheeses(Collections.emptyList());
+            mAdapter.setCheeses(Collections.<String>emptyList());
         } else {
             mAdapter.setCheeses(result);
         }
