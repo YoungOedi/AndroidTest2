@@ -117,7 +117,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
         });
 
         return textChangeObservable.filter((query) ->
-                query.length() > 1
+                query.length() >= 2
         ).debounce(650, TimeUnit.MILLISECONDS);
     }
 
@@ -153,7 +153,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
         return textChangeObservable.filter(new Predicate<String>() {
             @Override
             public boolean test(String query) throws Exception {
-                return query.length() > 1;
+                return query.length() >= 2;
             }
         }).debounce(500, TimeUnit.MILLISECONDS);
     }
