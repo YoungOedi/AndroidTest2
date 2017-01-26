@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">MyProject</string>
     <string name="action_settings">Settings</string>
-    <string name="nothing_found">No cheeses found</string>
-    <string name="search">search</string>
-    <string name="search_title">Suche PLACEHOLDER</string>
 </resources>
