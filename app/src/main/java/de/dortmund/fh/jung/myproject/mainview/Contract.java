@@ -7,6 +7,8 @@ import de.dortmund.fh.jung.myproject.mvp.BaseView;
 public interface Contract {
     interface View extends BaseView {
         void setText(String text);
+        void goToSearchActivity();
+        void goToChaosActivity();
     }
 
     interface Presenter extends BasePresenter<View> {

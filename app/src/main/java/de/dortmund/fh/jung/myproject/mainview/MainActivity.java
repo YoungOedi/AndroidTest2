@@ -14,12 +14,13 @@ import de.dortmund.fh.jung.myproject.BaseActivity;
 import javax.inject.Inject;
 
 import de.dortmund.fh.jung.myproject.R;
+import de.dortmund.fh.jung.myproject.chaosview.ChaosActivity;
 import de.dortmund.fh.jung.myproject.searchview.SearchActivity;
 
 public class MainActivity extends BaseActivity implements Contract.View {
 
     @Inject
-    Contract.Presenter mPresenter;
+    Contract.Presenter presenter;
     @Inject
     Context mContext;
 
@@ -32,25 +33,32 @@ public class MainActivity extends BaseActivity implements Contract.View {
 
         getAppComponent().inject(this);
 
-//        // Create the presenter
-//        DaggerMyComponent.builder()
-//                .presenterModule(new PresenterModule())
-//                .build()
-//                .inject(this);
-
         // Bind this view to presenter
-        mPresenter.bind(this);
+        presenter.bind(this);
 
-        findViewById(R.id.fab).setOnClickListener(view -> {
-            Intent intent = new Intent(this.getApplicationContext(), SearchActivity.class);
-            startActivity(intent);
+        findViewById(R.id.dashboard_container_cheesefinder).setOnClickListener(view -> {
+            presenter.handleClickEvent(view.getId());
         });
+
+        findViewById(R.id.dashboard_container_matze_meter).setOnClickListener(view -> {
+            presenter.handleClickEvent(view.getId());
+        });
+    }
+
+    public void goToSearchActivity() {
+        Intent intent = new Intent(this.getApplicationContext(), SearchActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToChaosActivity() {
+        Intent intent = new Intent(this.getApplicationContext(), ChaosActivity.class);
+        startActivity(intent);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.unbind();
+        presenter.unbind();
     }
 
     @Override
@@ -63,7 +71,7 @@ public class MainActivity extends BaseActivity implements Contract.View {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        mPresenter.handleClickEvent(id);
+        presenter.handleClickEvent(id);
         // noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;

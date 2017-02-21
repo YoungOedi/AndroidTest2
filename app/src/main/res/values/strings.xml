@@ -4,4 +4,10 @@
     <string name="nothing_found">No cheeses found</string>
     <string name="search">search</string>
     <string name="search_title">Suche PLACEHOLDER</string>
+
+
+    <string name="matze_tile_title">Matze Meter</string>
+    <string name="cheese_tile_title">Cheese Finder</string>
+
+    <string name="remove_unit">Remove</string>
 </resources>

@@ -19,9 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".searchview.SearchActivity"
-            android:label="@string/search_title">
-        </activity>
+        <activity
+            android:name=".searchview.SearchActivity"
+            android:label="@string/search_title"></activity>
+        <activity android:name=".chaosview.ChaosActivity"></activity>
     </application>
 
 </manifest>

@@ -7,10 +7,6 @@ import de.dortmund.fh.jung.myproject.di.ComponentProvider;
 import de.dortmund.fh.jung.myproject.di.DaggerMyComponent;
 import de.dortmund.fh.jung.myproject.di.MyComponent;
 
-/**
- * Created by hendrikjung on 30.12.16.
- */
-
 public class ParentApplication extends Application implements ComponentProvider {
 
     private MyComponent mComponent;

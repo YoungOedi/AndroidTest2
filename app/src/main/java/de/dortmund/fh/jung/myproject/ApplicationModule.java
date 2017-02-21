@@ -6,10 +6,6 @@ import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by hendrikjung on 30.12.16.
- */
-
 @Module
 public class ApplicationModule {
 
