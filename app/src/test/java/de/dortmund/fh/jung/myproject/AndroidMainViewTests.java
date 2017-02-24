@@ -21,13 +21,6 @@ import static junit.framework.Assert.assertEquals;
 public class AndroidMainViewTests{
 
     @Test
-    public void firstTest(){
-        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
-        FloatingActionButton button = (FloatingActionButton)activity.findViewById(R.id.fab);
-        assertEquals(button.getVisibility(), View.VISIBLE);
-    }
-
-    @Test
     public void searchViewButtonTextTest() {
         SearchActivity activity = Robolectric.setupActivity(SearchActivity.class);
         Button button = (Button)activity.findViewById(R.id.search_button);

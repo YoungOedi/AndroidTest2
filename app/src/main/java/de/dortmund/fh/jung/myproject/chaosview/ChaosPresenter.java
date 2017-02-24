@@ -23,9 +23,17 @@ public class ChaosPresenter implements ChaosContract.Presenter {
 
     }
 
-    public List<Unit> getDummyUnitList(){
-        //Create Dummy.
-        //Master Level 2, MidleReward 3 and Greater Reward 1
+    @Override
+    public List<Unit> getUnitList(){
+       return this.createDummyUnitList();
+    }
+
+    @Override
+    public void goToNewUnitActivity() {
+        view.changeViewToNewUnitActivity();
+    }
+
+    private List<Unit> createDummyUnitList(){
         Unit dummy = new Unit("Herald 1", God.NURGLE);
         dummy.setMasteryLevel(2);
         ArrayList list = new ArrayList<Integer>();

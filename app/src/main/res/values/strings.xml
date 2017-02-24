@@ -1,13 +1,24 @@
 <resources>
-    <string name="app_name">MyProject</string>
+    <string name="app_name">Gifts of Chaos</string>
     <string name="action_settings">Settings</string>
     <string name="nothing_found">No cheeses found</string>
     <string name="search">search</string>
     <string name="search_title">Suche PLACEHOLDER</string>
 
 
-    <string name="matze_tile_title">Matze Meter</string>
+    <string name="matze_tile_title">Unit List</string>
     <string name="cheese_tile_title">Cheese Finder</string>
 
     <string name="remove_unit">Remove</string>
+    <string name="unit_name_hint">Unit Name</string>
+    
+    <string name="lesser_gift">Lesser Gift</string>
+    <string name="midle_gift">Midle Gift</string>
+    <string name="greater_gift">Greater Gift</string>
+    <string name="mastery_level">Mastery Level</string>
+    
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
 </resources>

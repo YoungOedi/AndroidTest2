@@ -8,9 +8,11 @@ import de.dortmund.fh.jung.myproject.mvp.BaseView;
 
 public interface ChaosContract {
     interface View extends BaseView {
+        void changeViewToNewUnitActivity();
     }
 
     interface Presenter extends BasePresenter<ChaosContract.View> {
-        List<Unit> getDummyUnitList();
+        List<Unit> getUnitList();
+        void goToNewUnitActivity();
     }
 }

@@ -11,6 +11,7 @@ public class Unit {
     private List<Integer> giftSmall;
     private List<Integer> gitftMidle;
     private List<Integer> giftGreat;
+    private String photoFilePath;
 
     public Unit(String name, ChaosPresenter.God god) {
         this(name, god, 0);
@@ -68,5 +69,13 @@ public class Unit {
 
     public void setGiftSmall(List<Integer> giftSmall) {
         this.giftSmall = giftSmall;
+    }
+
+    public String getPhotoFilePath() {
+        return photoFilePath;
+    }
+
+    public void setPhotoFilePath(String photoFilePath) {
+        this.photoFilePath = photoFilePath;
     }
 }
