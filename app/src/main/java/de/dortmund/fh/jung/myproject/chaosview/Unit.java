@@ -3,21 +3,27 @@ package de.dortmund.fh.jung.myproject.chaosview;
 
 import java.util.List;
 
+import de.dortmund.fh.jung.myproject.God;
+
 public class Unit {
 
     private String name;
     private int masteryLevel;
-    private ChaosPresenter.God god;
-    private List<Integer> giftSmall;
-    private List<Integer> gitftMidle;
-    private List<Integer> giftGreat;
+    private God god;
+    private List<Integer> lesserGift;
+    private List<Integer> middleGift;
+    private List<Integer> greaterGift;
     private String photoFilePath;
 
-    public Unit(String name, ChaosPresenter.God god) {
+    public Unit(){
+
+    }
+
+    public Unit(String name, God god) {
         this(name, god, 0);
     }
 
-    public Unit(String name, ChaosPresenter.God god, int masteryLevel) {
+    public Unit(String name, God god, int masteryLevel) {
         this.name = name;
         this.god = god;
         this.masteryLevel = masteryLevel;
@@ -35,40 +41,40 @@ public class Unit {
         this.masteryLevel = masteryLevel;
     }
 
-    public List<Integer> getGiftGreat() {
-        return giftGreat;
-    }
-
-    public void setGiftGreat(List<Integer> giftGreat) {
-        this.giftGreat = giftGreat;
-    }
-
-    public List<Integer> getGitftMidle() {
-        return gitftMidle;
-    }
-
-    public void setGitftMidle(List<Integer> gitftMidle) {
-        this.gitftMidle = gitftMidle;
-    }
-
     public int getMasteryLevel() {
         return masteryLevel;
     }
 
-    public ChaosPresenter.God getGod() {
+    public God getGod() {
         return god;
     }
 
-    public void setGod(ChaosPresenter.God god) {
+    public void setGod(God god) {
         this.god = god;
     }
 
-    public List<Integer> getGiftSmall() {
-        return giftSmall;
+    public List<Integer> getLesserGift() {
+        return lesserGift;
     }
 
-    public void setGiftSmall(List<Integer> giftSmall) {
-        this.giftSmall = giftSmall;
+    public void setLesserGift(List<Integer> lesserGift) {
+        this.lesserGift = lesserGift;
+    }
+
+    public List<Integer> getMiddleGift() {
+        return middleGift;
+    }
+
+    public void setMiddleGift(List<Integer> middleGift) {
+        this.middleGift = middleGift;
+    }
+
+    public List<Integer> getGreaterGift() {
+        return greaterGift;
+    }
+
+    public void setGreaterGift(List<Integer> greaterGift) {
+        this.greaterGift = greaterGift;
     }
 
     public String getPhotoFilePath() {

@@ -55,4 +55,11 @@ public class ChaosActivity extends BaseActivity implements ChaosContract.View {
         Intent intent = new Intent(this, CreateNewUnitActivity.class);
         startActivity(intent);
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.unbind();
+    }
 }

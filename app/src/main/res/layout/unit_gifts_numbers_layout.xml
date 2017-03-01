@@ -5,21 +5,16 @@
     <TextView
         android:text="@string/zero"
         style="@style/NumberTextView"
-        android:id="@+id/textView" />
+        android:id="@+id/textView_gift_number_zero" />
 
     <TextView
         android:text="@string/one"
         style="@style/NumberTextView"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView_gift_number_one" />
 
     <TextView
         android:text="@string/two"
         style="@style/NumberTextView"
-        android:id="@+id/textView3"
-     />
-
-    <TextView
-        android:text="@string/three"
-        style="@style/NumberTextView"
-        android:id="@+id/textView4" />
+        android:id="@+id/textView_gift_number_two"
+        />
 </LinearLayout>

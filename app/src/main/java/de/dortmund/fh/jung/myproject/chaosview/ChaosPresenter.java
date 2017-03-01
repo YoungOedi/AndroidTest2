@@ -6,15 +6,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import de.dortmund.fh.jung.myproject.GiftType;
+import de.dortmund.fh.jung.myproject.God;
+
 public class ChaosPresenter implements ChaosContract.Presenter {
-
-    public enum GiftType {
-        SMALL, MIDDLE, GREAT
-    }
-
-    public enum God {
-        TZZENCH, NURGLE, SLAANESCH
-    }
 
     private ChaosContract.View view;
 
@@ -38,10 +33,10 @@ public class ChaosPresenter implements ChaosContract.Presenter {
         dummy.setMasteryLevel(2);
         ArrayList list = new ArrayList<Integer>();
         list.add(1);
-        dummy.setGiftGreat(list);
+        dummy.setGreaterGift(list);
         list.clear();
         list.add(3);
-        dummy.setGitftMidle(list);
+        dummy.setMiddleGift(list);
 
         Unit dummy2 = new Unit("Great Unclean One", God.NURGLE);
         dummy2.setMasteryLevel(3);
@@ -49,7 +44,7 @@ public class ChaosPresenter implements ChaosContract.Presenter {
         list.clear();
         list.add(1);
         list.add(5);
-        dummy2.setGitftMidle(list);
+        dummy2.setMiddleGift(list);
 
         ArrayList unitList = new ArrayList<Unit>();
         unitList.add(dummy);

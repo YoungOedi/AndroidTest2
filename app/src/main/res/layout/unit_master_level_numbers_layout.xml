@@ -5,16 +5,21 @@
     <TextView
         android:text="@string/zero"
         style="@style/NumberTextView"
-        android:id="@+id/textView" />
+        android:id="@+id/textView_mastery_level_zero" />
 
     <TextView
         android:text="@string/one"
         style="@style/NumberTextView"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView_mastery_level_one" />
 
     <TextView
         android:text="@string/two"
         style="@style/NumberTextView"
-        android:id="@+id/textView3"
-        />
+        android:id="@+id/textView_mastery_level_two"
+     />
+
+    <TextView
+        android:text="@string/three"
+        style="@style/NumberTextView"
+        android:id="@+id/textView_mastery_level_three" />
 </LinearLayout>
