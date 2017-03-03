@@ -16,7 +16,7 @@ public class Unit {
     private String photoFilePath;
 
     public Unit(){
-
+        this("No Name", God.NOGOD);
     }
 
     public Unit(String name, God god) {

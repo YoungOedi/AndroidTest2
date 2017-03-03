@@ -1,15 +1,23 @@
 
 package de.dortmund.fh.jung.myproject.create.unit;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
+import de.dortmund.fh.jung.myproject.God;
 import de.dortmund.fh.jung.myproject.chaosview.Unit;
 
 public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
 
+    private static final String TAG = CreateNewUnitPresenter.class.getSimpleName();
+
     CreateNewUnitContract.View view;
     Unit unit;
     int[][] highlightedViews;
+    int lesserGiftCounter;
+    int middleGiftCounter;
+    int greaterGiftCounter;
 
     @Inject
     public CreateNewUnitPresenter() {
@@ -38,7 +46,15 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
 
     @Override
     public void createNewUnit() {
-
+        // TODO
+        Log.i(TAG,"Es wurden folgende Daten erfasst:");
+        Log.i(TAG, "Unit Name: " + unit.getName());
+        Log.i(TAG, "God: "+unit.getGod().name());
+        Log.i(TAG, "Mastery Level: "+unit.getMasteryLevel());
+        Log.i(TAG, "GreaterGifts: "+greaterGiftCounter);
+        Log.i(TAG, "MiddleGifts: "+middleGiftCounter);
+        Log.i(TAG, "LesserGifts: "+lesserGiftCounter);
+        Log.i(TAG, "Image lies at: "+unit.getPhotoFilePath());
     }
 
     @Override
@@ -57,14 +73,44 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
         return false;
     }
 
+    @Override
+    public void changeGod(God god) {
+        if (god == God.NURGLE) {
+            view.changeThemeToNurgle();
+            unit.setGod(God.NURGLE);
+        } else if (god == God.KHORNE) {
+            view.changeThemeToKhorne();
+            unit.setGod(God.KHORNE);
+        } else if (god == God.SLAANESCH) {
+            view.changeThemeToSlaanesh();
+            unit.setGod(God.SLAANESCH);
+        } else if (god == God.TZZENCH) {
+            view.changeThemeToTzzench();
+            unit.setGod(God.TZZENCH);
+        }
+    }
+
+    @Override
+    public void setUnitName(String name) {
+        unit.setName(name);
+    }
+
     private void removeHighlightsInARow(final int row) {
-        for(int c=0; c<highlightedViews[row].length;c++){
-            highlightedViews[row][c]=0;
+        for (int c = 0; c < highlightedViews[row].length; c++) {
+            highlightedViews[row][c] = 0;
         }
     }
 
     private void setUnitStats(final int row, final int column) {
-
+        if (row == 0) {
+            unit.setMasteryLevel(column);
+        } else if (row == 1) {
+            greaterGiftCounter = column;
+        } else if (row == 2) {
+            middleGiftCounter = column;
+        } else if (row == 3) {
+            lesserGiftCounter = column;
+        }
     }
 
     private void saveNewUnit() {

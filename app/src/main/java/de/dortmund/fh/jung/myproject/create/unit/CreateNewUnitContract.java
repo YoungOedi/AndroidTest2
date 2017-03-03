@@ -8,7 +8,10 @@ import de.dortmund.fh.jung.myproject.mvp.BaseView;
 public interface CreateNewUnitContract {
     interface View extends BaseView {
         void updateHighlights(final int row, int[] highlighted);
-        void changeTheme(final God god);
+        void changeThemeToKhorne();
+        void changeThemeToSlaanesh();
+        void changeThemeToNurgle();
+        void changeThemeToTzzench();
     }
 
 
@@ -18,5 +21,6 @@ public interface CreateNewUnitContract {
         void handleClickEvent(final int row, final int column);
         boolean isHighlighted(final int row, final int column);
         void changeGod(final God god);
+        void setUnitName(final String name);
     }
 }

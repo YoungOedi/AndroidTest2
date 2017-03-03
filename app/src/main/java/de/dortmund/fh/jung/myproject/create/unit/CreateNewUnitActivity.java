@@ -9,9 +9,11 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -54,11 +56,25 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
         image = (ImageView) findViewById(R.id.create_new_unit_imageView);
         image.setOnClickListener(view -> this.takePicture());
 
+        findViewById(R.id.button_save_new_unit).setOnClickListener(view -> {
+            String name = ((EditText) findViewById(R.id.unit_name_inputfield)).getText().toString();
+            presenter.setUnitName(name);
+            presenter.createNewUnit();
+        });
+
+        this.setUpGodButtons();
+
         this.setUpOnClickListenerOnMasteryRow();
         this.setUpOnClickListenerOnGiftRow(1, R.id.greater_gifts_numbers);
         this.setUpOnClickListenerOnGiftRow(2, R.id.middle_gifts_numbers);
         this.setUpOnClickListenerOnGiftRow(3, R.id.lesser_gifts_numbers);
+    }
 
+    private void setUpGodButtons() {
+        findViewById(R.id.imageView_khorne).setOnClickListener(view -> presenter.changeGod(God.KHORNE));
+        findViewById(R.id.imageView_nurgle).setOnClickListener(view -> presenter.changeGod(God.NURGLE));
+        findViewById(R.id.imageView_slaanesh).setOnClickListener(view -> presenter.changeGod(God.SLAANESCH));
+        findViewById(R.id.imageView_tzzench).setOnClickListener(view -> presenter.changeGod(God.TZZENCH));
     }
 
     private void setUpOnClickListenerOnMasteryRow() {
@@ -69,7 +85,8 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
         setUpOnClickListenerById(0, 3, R.id.textView_mastery_level_three, layout);
     }
 
-    private void setUpOnClickListenerById(final int row, final int column, final int viewId, final ViewGroup targetLayout) {
+    private void setUpOnClickListenerById(final int row, final int column, final int viewId,
+            final ViewGroup targetLayout) {
         TextView view = (TextView) targetLayout.findViewById(viewId);
         view.setOnClickListener(clickedView -> presenter.handleClickEvent(row, column));
     }
@@ -162,12 +179,21 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
         LinearLayout layout;
         TextView view;
         int id;
-        switch (row){
-            case 0: updateHighlightsForMasteryRow(highlighted); return;
-            case 1: id = R.id.greater_gifts_numbers; break;
-            case 2: id = R.id.middle_gifts_numbers; break;
-            case 3: id = R.id.lesser_gifts_numbers; break;
-            default: return;
+        switch (row) {
+            case 0:
+                updateHighlightsForMasteryRow(highlighted);
+                return;
+            case 1:
+                id = R.id.greater_gifts_numbers;
+                break;
+            case 2:
+                id = R.id.middle_gifts_numbers;
+                break;
+            case 3:
+                id = R.id.lesser_gifts_numbers;
+                break;
+            default:
+                return;
         }
         layout = (LinearLayout) findViewById(id);
 
@@ -180,11 +206,61 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     }
 
     @Override
-    public void changeTheme(God god) {
-
+    public void changeThemeToKhorne() {
+       this.changeKhorneIcon(true);
+        ((ImageView) findViewById(R.id.imageView_nurgle)).setBackgroundColor(Color.TRANSPARENT);
+        this.changeSlaaneshIcon(false);
+        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
     }
 
-    private void updateHighlightsForMasteryRow(int[] highlighted){
+    private void changeKhorneIcon(final boolean chosen){
+        ImageView view = ((ImageView) findViewById(R.id.imageView_khorne));
+        if(chosen) {
+            view.setBackgroundColor(ContextCompat.getColor(this, R.color.khorne_red));
+            view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.khorne_white));
+        } else {
+            view.setBackgroundColor(Color.TRANSPARENT);
+            view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.khorne));
+        }
+    }
+
+    @Override
+    public void changeThemeToNurgle() {
+        this.changeKhorneIcon(false);
+        ((ImageView) findViewById(R.id.imageView_nurgle))
+                .setBackgroundColor(ContextCompat.getColor(this, R.color.nurgle_green));
+        this.changeSlaaneshIcon(false);
+        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    @Override
+    public void changeThemeToSlaanesh() {
+        this.changeKhorneIcon(false);
+        ((ImageView) findViewById(R.id.imageView_nurgle)).setBackgroundColor(Color.TRANSPARENT);
+        this.changeSlaaneshIcon(true);
+        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    private void changeSlaaneshIcon(final boolean chosen){
+        ImageView view = ((ImageView) findViewById(R.id.imageView_slaanesh));
+        if(chosen) {
+            view.setBackgroundColor(ContextCompat.getColor(this, R.color.daemonette_hide));
+            view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.slaanesh_white));
+        } else {
+            view.setBackgroundColor(Color.TRANSPARENT);
+            view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.slaanesh));
+        }
+    }
+
+    @Override
+    public void changeThemeToTzzench() {
+        this.changeKhorneIcon(false);
+        ((ImageView) findViewById(R.id.imageView_nurgle)).setBackgroundColor(Color.TRANSPARENT);
+        this.changeSlaaneshIcon(false);
+        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    private void updateHighlightsForMasteryRow(int[] highlighted) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.mastery_level_numbers);
         TextView view;
         view = (TextView) layout.findViewById(R.id.textView_mastery_level_zero);
@@ -197,8 +273,8 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
         this.setHighlightForTextView(view, highlighted[3]);
     }
 
-    private void setHighlightForTextView(TextView view, int highlight){
-        if(highlight==1){
+    private void setHighlightForTextView(TextView view, int highlight) {
+        if (highlight == 1) {
             view.setTextSize(23);
             view.setTypeface(Typeface.DEFAULT_BOLD);
             view.setBackgroundColor(Color.BLACK);
@@ -207,7 +283,7 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
             view.setTextSize(20);
             view.setTypeface(Typeface.DEFAULT);
             view.setBackgroundColor(Color.WHITE);
-            view.setShadowLayer(1,2,2,R.color.text_shadow_white);
+            view.setShadowLayer(1, 2, 2, R.color.text_shadow_white);
             view.setTextColor(Color.BLACK);
         }
     }
