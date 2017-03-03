@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -86,7 +87,7 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     }
 
     private void setUpOnClickListenerById(final int row, final int column, final int viewId,
-            final ViewGroup targetLayout) {
+                                          final ViewGroup targetLayout) {
         TextView view = (TextView) targetLayout.findViewById(viewId);
         view.setOnClickListener(clickedView -> presenter.handleClickEvent(row, column));
     }
@@ -207,15 +208,15 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
 
     @Override
     public void changeThemeToKhorne() {
-       this.changeKhorneIcon(true);
-        ((ImageView) findViewById(R.id.imageView_nurgle)).setBackgroundColor(Color.TRANSPARENT);
+        this.changeKhorneIcon(true);
+        findViewById(R.id.imageView_nurgle).setBackgroundColor(Color.TRANSPARENT);
         this.changeSlaaneshIcon(false);
-        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
     }
 
-    private void changeKhorneIcon(final boolean chosen){
+    private void changeKhorneIcon(final boolean chosen) {
         ImageView view = ((ImageView) findViewById(R.id.imageView_khorne));
-        if(chosen) {
+        if (chosen) {
             view.setBackgroundColor(ContextCompat.getColor(this, R.color.khorne_red));
             view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.khorne_white));
         } else {
@@ -227,23 +228,23 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     @Override
     public void changeThemeToNurgle() {
         this.changeKhorneIcon(false);
-        ((ImageView) findViewById(R.id.imageView_nurgle))
+        findViewById(R.id.imageView_nurgle)
                 .setBackgroundColor(ContextCompat.getColor(this, R.color.nurgle_green));
         this.changeSlaaneshIcon(false);
-        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
     }
 
     @Override
     public void changeThemeToSlaanesh() {
         this.changeKhorneIcon(false);
-        ((ImageView) findViewById(R.id.imageView_nurgle)).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.imageView_nurgle).setBackgroundColor(Color.TRANSPARENT);
         this.changeSlaaneshIcon(true);
-        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
     }
 
-    private void changeSlaaneshIcon(final boolean chosen){
+    private void changeSlaaneshIcon(final boolean chosen) {
         ImageView view = ((ImageView) findViewById(R.id.imageView_slaanesh));
-        if(chosen) {
+        if (chosen) {
             view.setBackgroundColor(ContextCompat.getColor(this, R.color.daemonette_hide));
             view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.slaanesh_white));
         } else {
@@ -255,9 +256,35 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     @Override
     public void changeThemeToTzzench() {
         this.changeKhorneIcon(false);
-        ((ImageView) findViewById(R.id.imageView_nurgle)).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.imageView_nurgle).setBackgroundColor(Color.TRANSPARENT);
         this.changeSlaaneshIcon(false);
-        ((ImageView) findViewById(R.id.imageView_tzzench)).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    @Override
+    public void changeMasteryLevelVisibility(boolean show) {
+        int visibleFlag;
+        boolean viewsVisible = checkIfMasteryViewsVisibility();
+        if (show && !viewsVisible) {
+            visibleFlag = View.VISIBLE;
+        } else if (!show & viewsVisible) {
+            visibleFlag = View.INVISIBLE;
+        } else {
+            return;
+        }
+        findViewById(R.id.mastery_level_numbers).setVisibility(visibleFlag);
+        findViewById(R.id.textView_masteryLevelLabel).setVisibility(visibleFlag);
+    }
+
+    @Override
+    public void showToast(final String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean checkIfMasteryViewsVisibility() {
+        return findViewById(R.id.textView_masteryLevelLabel).isShown()
+                & findViewById(R.id.mastery_level_numbers).isShown();
+
     }
 
     private void updateHighlightsForMasteryRow(int[] highlighted) {

@@ -12,6 +12,8 @@ public interface CreateNewUnitContract {
         void changeThemeToSlaanesh();
         void changeThemeToNurgle();
         void changeThemeToTzzench();
+        void changeMasteryLevelVisibility(final boolean show);
+        void showToast(final String message);
     }
 
 

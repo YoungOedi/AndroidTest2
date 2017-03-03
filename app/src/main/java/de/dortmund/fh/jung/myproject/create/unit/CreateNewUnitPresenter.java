@@ -47,14 +47,14 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
     @Override
     public void createNewUnit() {
         // TODO
-        Log.i(TAG,"Es wurden folgende Daten erfasst:");
+        Log.i(TAG, "Es wurden folgende Daten erfasst:");
         Log.i(TAG, "Unit Name: " + unit.getName());
-        Log.i(TAG, "God: "+unit.getGod().name());
-        Log.i(TAG, "Mastery Level: "+unit.getMasteryLevel());
-        Log.i(TAG, "GreaterGifts: "+greaterGiftCounter);
-        Log.i(TAG, "MiddleGifts: "+middleGiftCounter);
-        Log.i(TAG, "LesserGifts: "+lesserGiftCounter);
-        Log.i(TAG, "Image lies at: "+unit.getPhotoFilePath());
+        Log.i(TAG, "God: " + unit.getGod().name());
+        Log.i(TAG, "Mastery Level: " + unit.getMasteryLevel());
+        Log.i(TAG, "GreaterGifts: " + greaterGiftCounter);
+        Log.i(TAG, "MiddleGifts: " + middleGiftCounter);
+        Log.i(TAG, "LesserGifts: " + lesserGiftCounter);
+        Log.i(TAG, "Image lies at: " + unit.getPhotoFilePath());
     }
 
     @Override
@@ -78,15 +78,19 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
         if (god == God.NURGLE) {
             view.changeThemeToNurgle();
             unit.setGod(God.NURGLE);
+            view.changeMasteryLevelVisibility(true);
         } else if (god == God.KHORNE) {
             view.changeThemeToKhorne();
             unit.setGod(God.KHORNE);
+            view.changeMasteryLevelVisibility(false);
         } else if (god == God.SLAANESCH) {
             view.changeThemeToSlaanesh();
             unit.setGod(God.SLAANESCH);
+            view.changeMasteryLevelVisibility(true);
         } else if (god == God.TZZENCH) {
             view.changeThemeToTzzench();
             unit.setGod(God.TZZENCH);
+            view.changeMasteryLevelVisibility(true);
         }
     }
 
