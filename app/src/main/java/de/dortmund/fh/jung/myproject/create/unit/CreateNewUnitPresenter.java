@@ -79,14 +79,17 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
             view.changeThemeToNurgle();
             unit.setGod(God.NURGLE);
             view.changeMasteryLevelVisibility(true);
+            view.showNurgleMessage("Want a hug?");
         } else if (god == God.KHORNE) {
             view.changeThemeToKhorne();
             unit.setGod(God.KHORNE);
             view.changeMasteryLevelVisibility(false);
+            view.showKhorneMessage("Blood for the Bloodgod");
         } else if (god == God.SLAANESCH) {
             view.changeThemeToSlaanesh();
             unit.setGod(God.SLAANESCH);
             view.changeMasteryLevelVisibility(true);
+            view.showSlaaneshMessage("( ͡° ͜ʖ ͡°)");
         } else if (god == God.TZZENCH) {
             view.changeThemeToTzzench();
             unit.setGod(God.TZZENCH);

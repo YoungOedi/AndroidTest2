@@ -14,6 +14,10 @@ public interface CreateNewUnitContract {
         void changeThemeToTzzench();
         void changeMasteryLevelVisibility(final boolean show);
         void showToast(final String message);
+        void showKhorneMessage(final String message);
+        void showSlaaneshMessage(final String message);
+        void showTzeenchMessage(final String message);
+        void showNurgleMessage(final String message);
     }
 
 

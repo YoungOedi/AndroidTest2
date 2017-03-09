@@ -1,6 +1,7 @@
 
 package de.dortmund.fh.jung.myproject.create.unit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,8 +13,12 @@ import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -209,7 +214,7 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     @Override
     public void changeThemeToKhorne() {
         this.changeKhorneIcon(true);
-        findViewById(R.id.imageView_nurgle).setBackgroundColor(Color.TRANSPARENT);
+        this.changeNurgleIcon(false);
         this.changeSlaaneshIcon(false);
         findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
     }
@@ -228,16 +233,26 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     @Override
     public void changeThemeToNurgle() {
         this.changeKhorneIcon(false);
-        findViewById(R.id.imageView_nurgle)
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.nurgle_green));
+        this.changeNurgleIcon(true);
         this.changeSlaaneshIcon(false);
         findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    private void changeNurgleIcon(final boolean chosen){
+        ImageView view = ((ImageView) findViewById(R.id.imageView_nurgle));
+        if (chosen) {
+            view.setBackgroundColor(ContextCompat.getColor(this, R.color.nurgle_green));
+            view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.nurgle_complement_image));
+        } else {
+            view.setBackgroundColor(Color.TRANSPARENT);
+            view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.nurgle));
+        }
     }
 
     @Override
     public void changeThemeToSlaanesh() {
         this.changeKhorneIcon(false);
-        findViewById(R.id.imageView_nurgle).setBackgroundColor(Color.TRANSPARENT);
+        this.changeNurgleIcon(false);
         this.changeSlaaneshIcon(true);
         findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
     }
@@ -256,9 +271,9 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     @Override
     public void changeThemeToTzzench() {
         this.changeKhorneIcon(false);
-        findViewById(R.id.imageView_nurgle).setBackgroundColor(Color.TRANSPARENT);
+        this.changeNurgleIcon(false);
         this.changeSlaaneshIcon(false);
-        findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.imageView_tzzench).setBackgroundColor(ContextCompat.getColor(this, R.color.blue_horror));
     }
 
     @Override
@@ -277,8 +292,75 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     }
 
     @Override
-    public void showToast(final String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void showToast(String message) {
+
+    }
+
+    @Override
+    public void showKhorneMessage(String message) {
+        int backgroundColor = R.color.khorne_red;
+        int textColor = R.color.white;
+        int image = R.drawable.khorne_white;
+        this.displayMessage(message, backgroundColor, textColor, image);
+    }
+
+    @Override
+    public void showSlaaneshMessage(String message) {
+        int backgroundColor = R.color.daemonette_hide;
+        int textColor = R.color.white;
+        int image = R.drawable.slaanesh_white;
+        this.displayMessage(message, backgroundColor, textColor, image);
+    }
+
+    @Override
+    public void showTzeenchMessage(String message) {
+
+    }
+
+    @Override
+    public void showNurgleMessage(String message) {
+        int backgroundColor = R.color.nurgle_green;
+        int textColor = R.color.nurgle_complement;
+        int image = R.drawable.nurgle_complement_image;
+        this.displayMessage(message, backgroundColor, textColor, image);
+    }
+
+    private void displayMessage(final String message, final int backGroundColor, final int textColor, final int image) {
+        Toast toast = new Toast(this);
+        LinearLayout layout = new LinearLayout(this);
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int screenWidth = displaymetrics.widthPixels;
+        int screenHeight = displaymetrics.heightPixels;
+
+        layout.setBackgroundColor(ContextCompat.getColor(this, backGroundColor));
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setGravity(Gravity.CENTER);
+
+        TextView tv = new TextView(this);
+        tv.setTextColor(ContextCompat.getColor(this, textColor));
+        tv.setTextSize(25);
+        tv.setGravity(Gravity.CENTER);
+        tv.setText(message);
+        tv.setPadding(5, 5, 5, 5);
+        tv.setBackgroundColor(ContextCompat.getColor(this, backGroundColor));
+        tv.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*0.8), (int)(screenHeight*0.2)));
+
+        ImageView img = new ImageView(this);
+        img.setPadding(5,15,5,5);
+        img.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*0.4), (int)(screenHeight*0.2)));
+        img.setImageResource(image);
+
+        img.setBackgroundColor(ContextCompat.getColor(this, backGroundColor));
+
+        layout.addView(img);
+        layout.addView(tv);
+
+        toast.setView(layout);
+
+        toast.setGravity(Gravity.BOTTOM, 0, 50);
+        toast.show();
     }
 
     private boolean checkIfMasteryViewsVisibility() {
