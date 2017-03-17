@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import de.dortmund.fh.jung.myproject.God;
 import de.dortmund.fh.jung.myproject.chaosview.Unit;
+import de.dortmund.fh.jung.myproject.datastorage.ChaosUnitsDatabaseHelper;
+import de.dortmund.fh.jung.myproject.datastorage.Repository;
 
 public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
 
@@ -14,19 +16,22 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
 
     CreateNewUnitContract.View view;
     Unit unit;
+    Repository repository;
     int[][] highlightedViews;
     int lesserGiftCounter;
     int middleGiftCounter;
     int greaterGiftCounter;
 
     @Inject
-    public CreateNewUnitPresenter() {
+    public CreateNewUnitPresenter(Repository repository) {
         unit = new Unit();
         highlightedViews = new int[4][];
         highlightedViews[0] = new int[4];
         highlightedViews[1] = new int[3];
         highlightedViews[2] = new int[3];
         highlightedViews[3] = new int[3];
+
+        this.repository = repository;
     }
 
     @Override
@@ -55,6 +60,14 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
         Log.i(TAG, "MiddleGifts: " + middleGiftCounter);
         Log.i(TAG, "LesserGifts: " + lesserGiftCounter);
         Log.i(TAG, "Image lies at: " + unit.getPhotoFilePath());
+
+        try {
+            long id = this.saveNewUnit();
+            Log.d(TAG, "ID is : "+id);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        view.switchToChaosActivity(1);
     }
 
     @Override
@@ -120,7 +133,7 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
         }
     }
 
-    private void saveNewUnit() {
-
+    private long saveNewUnit() {
+        return repository.saveUnit(unit);
     }
 }

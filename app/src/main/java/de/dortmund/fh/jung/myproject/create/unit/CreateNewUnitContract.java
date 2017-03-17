@@ -18,6 +18,7 @@ public interface CreateNewUnitContract {
         void showSlaaneshMessage(final String message);
         void showTzeenchMessage(final String message);
         void showNurgleMessage(final String message);
+        void switchToChaosActivity(final long id);
     }
 
 

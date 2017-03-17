@@ -10,6 +10,8 @@ import de.dortmund.fh.jung.myproject.chaosview.ChaosModule;
 import de.dortmund.fh.jung.myproject.chaosview.ChaosPresenter;
 import de.dortmund.fh.jung.myproject.create.unit.CreateNewUnitActivity;
 import de.dortmund.fh.jung.myproject.create.unit.CreateNewUnitModule;
+import de.dortmund.fh.jung.myproject.datastorage.DataBaseModule;
+import de.dortmund.fh.jung.myproject.datastorage.Repository;
 import de.dortmund.fh.jung.myproject.mainview.MainActivity;
 import de.dortmund.fh.jung.myproject.mainview.PresenterModule;
 import de.dortmund.fh.jung.myproject.searchview.SearchActivity;
@@ -21,7 +23,8 @@ import de.dortmund.fh.jung.myproject.searchview.SearchModule;
         ApplicationModule.class,
         SearchModule.class,
         ChaosModule.class,
-        CreateNewUnitModule.class
+        CreateNewUnitModule.class,
+        DataBaseModule.class
 })
 public interface MyComponent {
 
@@ -32,4 +35,6 @@ public interface MyComponent {
     void inject(ChaosActivity activity);
 
     void inject(CreateNewUnitActivity activity);
+
+    void inject(Repository repository);
 }

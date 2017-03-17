@@ -1,7 +1,6 @@
 
 package de.dortmund.fh.jung.myproject.create.unit;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,11 +13,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Display;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +34,7 @@ import javax.inject.Inject;
 import de.dortmund.fh.jung.myproject.BaseActivity;
 import de.dortmund.fh.jung.myproject.God;
 import de.dortmund.fh.jung.myproject.R;
+import de.dortmund.fh.jung.myproject.chaosview.ChaosActivity;
 
 public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnitContract.View {
 
@@ -92,7 +91,7 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
     }
 
     private void setUpOnClickListenerById(final int row, final int column, final int viewId,
-                                          final ViewGroup targetLayout) {
+            final ViewGroup targetLayout) {
         TextView view = (TextView) targetLayout.findViewById(viewId);
         view.setOnClickListener(clickedView -> presenter.handleClickEvent(row, column));
     }
@@ -238,7 +237,7 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
         findViewById(R.id.imageView_tzzench).setBackgroundColor(Color.TRANSPARENT);
     }
 
-    private void changeNurgleIcon(final boolean chosen){
+    private void changeNurgleIcon(final boolean chosen) {
         ImageView view = ((ImageView) findViewById(R.id.imageView_nurgle));
         if (chosen) {
             view.setBackgroundColor(ContextCompat.getColor(this, R.color.nurgle_green));
@@ -325,6 +324,13 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
         this.displayMessage(message, backgroundColor, textColor, image);
     }
 
+    @Override
+    public void switchToChaosActivity(final long id) {
+        Intent intent = new Intent(this, ChaosActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
     private void displayMessage(final String message, final int backGroundColor, final int textColor, final int image) {
         Toast toast = new Toast(this);
         LinearLayout layout = new LinearLayout(this);
@@ -345,11 +351,11 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
         tv.setText(message);
         tv.setPadding(5, 5, 5, 5);
         tv.setBackgroundColor(ContextCompat.getColor(this, backGroundColor));
-        tv.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*0.8), (int)(screenHeight*0.2)));
+        tv.setLayoutParams(new LinearLayout.LayoutParams((int) (screenWidth * 0.8), (int) (screenHeight * 0.2)));
 
         ImageView img = new ImageView(this);
-        img.setPadding(5,15,5,5);
-        img.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*0.4), (int)(screenHeight*0.2)));
+        img.setPadding(5, 15, 5, 5);
+        img.setLayoutParams(new LinearLayout.LayoutParams((int) (screenWidth * 0.4), (int) (screenHeight * 0.2)));
         img.setImageResource(image);
 
         img.setBackgroundColor(ContextCompat.getColor(this, backGroundColor));
@@ -384,12 +390,10 @@ public class CreateNewUnitActivity extends BaseActivity implements CreateNewUnit
 
     private void setHighlightForTextView(TextView view, int highlight) {
         if (highlight == 1) {
-            view.setTextSize(23);
             view.setTypeface(Typeface.DEFAULT_BOLD);
             view.setBackgroundColor(Color.BLACK);
             view.setTextColor(Color.WHITE);
         } else {
-            view.setTextSize(20);
             view.setTypeface(Typeface.DEFAULT);
             view.setBackgroundColor(Color.WHITE);
             view.setShadowLayer(1, 2, 2, R.color.text_shadow_white);
