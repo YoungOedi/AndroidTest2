@@ -8,6 +8,7 @@ import de.dortmund.fh.jung.myproject.ApplicationModule;
 import de.dortmund.fh.jung.myproject.chaosview.ChaosActivity;
 import de.dortmund.fh.jung.myproject.chaosview.ChaosModule;
 import de.dortmund.fh.jung.myproject.chaosview.ChaosPresenter;
+import de.dortmund.fh.jung.myproject.chaosview.UnitAdapter;
 import de.dortmund.fh.jung.myproject.create.unit.CreateNewUnitActivity;
 import de.dortmund.fh.jung.myproject.create.unit.CreateNewUnitModule;
 import de.dortmund.fh.jung.myproject.datastorage.DataBaseModule;
@@ -37,4 +38,6 @@ public interface MyComponent {
     void inject(CreateNewUnitActivity activity);
 
     void inject(Repository repository);
+
+    void inject(ChaosPresenter presenter);
 }

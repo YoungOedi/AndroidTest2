@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import de.dortmund.fh.jung.myproject.God;
 import de.dortmund.fh.jung.myproject.chaosview.Unit;
-import de.dortmund.fh.jung.myproject.datastorage.ChaosUnitsDatabaseHelper;
 import de.dortmund.fh.jung.myproject.datastorage.Repository;
 
 public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
@@ -61,13 +60,22 @@ public class CreateNewUnitPresenter implements CreateNewUnitContract.Presenter {
         Log.i(TAG, "LesserGifts: " + lesserGiftCounter);
         Log.i(TAG, "Image lies at: " + unit.getPhotoFilePath());
 
+
+        generateGifts();
+        long id = -1;
         try {
-            long id = this.saveNewUnit();
+            Log.d(TAG, "Saving...");
+            id = this.saveNewUnit();
             Log.d(TAG, "ID is : "+id);
         } catch (Exception e){
             e.printStackTrace();
         }
-        view.switchToChaosActivity(1);
+        view.switchToChaosActivity(id);
+    }
+
+    private void generateGifts(){
+        int diceRoll = (int)(Math.random()*6+1);
+        repository.getGift(unit.getGod(),diceRoll);
     }
 
     @Override

@@ -10,6 +10,7 @@
     <string name="cheese_tile_title">Cheese Finder</string>
 
     <string name="remove_unit">Remove</string>
+    <string name="edit_unit">Edit</string>
     <string name="unit_name_hint">Unit Name</string>
     
     <string name="lesser_gift">Lesser Gift</string>

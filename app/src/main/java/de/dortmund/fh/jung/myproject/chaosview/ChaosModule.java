@@ -15,5 +15,4 @@ public class ChaosModule {
     static ChaosContract.Presenter providePresenter(ChaosPresenter presenter) {
         return presenter;
     }
-
 }

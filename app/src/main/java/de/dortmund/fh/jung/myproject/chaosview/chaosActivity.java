@@ -27,21 +27,19 @@ public class ChaosActivity extends BaseActivity implements ChaosContract.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chaos);
 
-        this.initializeRecyclerView();
-
         getAppComponent().inject(this);
         presenter.bind(this);
 
+        this.initializeRecyclerView();
         this.setOnClickListeners();
-
-        adapter.setData(presenter.getUnitList());
     }
 
     private void initializeRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.chaosUnitRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new UnitAdapter();
+        adapter = new UnitAdapter(presenter.provideUnitList());
+        adapter.provideRemovalObservable().subscribe(presenter);
         recyclerView.setAdapter(adapter);
     }
 
@@ -55,7 +53,6 @@ public class ChaosActivity extends BaseActivity implements ChaosContract.View {
         Intent intent = new Intent(this, CreateNewUnitActivity.class);
         startActivity(intent);
     }
-
 
     @Override
     protected void onDestroy() {

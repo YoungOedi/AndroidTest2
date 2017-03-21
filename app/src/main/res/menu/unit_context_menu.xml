@@ -2,6 +2,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <item
+        android:id="@+id/edit_unit"
+        android:orderInCategory="100"
+        android:title="@string/edit_unit" />
+    <item
         android:id="@+id/remove_unit"
         android:orderInCategory="100"
         android:title="@string/remove_unit" />
